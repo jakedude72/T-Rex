@@ -212,27 +212,27 @@ function draw() {
 //function to spawn the clouds
 function showClouds(){
   if (frameCount % Math.round(random(75, 150)) === 0) {
-    cloud1 = createSprite(600, 50, 10, 10);
+    cloud1 = createSprite(width, 50, 10, 10);
     cloud1.addImage(cloudImage);
     cloud1.scale = (random(0.25, 1.25))
     cloud1.y = Math.round(random(10, ground.y - 80))
     cloud1.velocityX = -3;
     trex.depth = cloud1.depth + 1;
     
-    cloud1.lifetime = 1200;
+    cloud1.lifetime = width + 250;
     
      cloudGroup.add(cloud1);
   } 
     
   if (frameCount % Math.round(random(75, 150)) === 0) {
-    cloud2 = createSprite(600, 50, 10, 10);
+    cloud2 = createSprite(width, 50, 10, 10);
     cloud2.addImage(cloudImage);
     cloud2.scale = (random(0.25, 1.25))
     cloud2.y = Math.round(random(10, ground.y - 130))
     cloud2.velocityX = -3;
     trex.depth = cloud2.depth + 1;
     
-    cloud2.lifetime = 1200;
+    cloud2.lifetime = width + 250;
     
     cloudGroup.add(cloud2);
   }
@@ -241,7 +241,7 @@ function showClouds(){
 
 function showObstacles() {
   if (createObstacle === 1) {
-    obstacle = createSprite(600, ground.y - 6 , 10, 10);
+    obstacle = createSprite(width, ground.y - 6 , 10, 10);
     obstacle.scale = 0.4;
     var rand = Math.round(random(1, 6));
     switch(rand){
@@ -261,7 +261,7 @@ function showObstacles() {
     }
     obstacle.velocityX = -4;
     
-    obstacle.lifetime = 1200;
+    obstacle.lifetime = width + 250;
     
     obstacleGroup.add(obstacle);
     
@@ -270,29 +270,29 @@ function showObstacles() {
 
 function showPlatforms() {
   if (frameCount % 50 === 0) {
-    floating_platforms = createSprite(600, 0, 60, 10);
+    floating_platforms = createSprite(width, 0, 60, 10);
     floating_platforms.y = Math.round(random(50, ground.y - 125))
     invisibleplatform = createSprite(floating_platforms.x, floating_platforms.y, 60, 4);
     invisibleplatform.visible = false;
     floating_platforms.velocityX = -4
-    floating_platforms.lifetime = 1250;
+    floating_platforms.lifetime = width + 250;
     invisibleplatform.velocityX = -4
-    invisibleplatform.lifetime = 1250;
+    invisibleplatform.lifetime = width + 250;
     
     floatingplatformGroup.add(floating_platforms);
     invisibleGroup.add(invisibleplatform);
   }
   
   if (frameCount % 285 === 0) {
-    jumpplatform = createSprite(600, 0, 30, 10);
+    jumpplatform = createSprite(width, 0, 30, 10);
     jumpplatform.y = Math.round(random(50, ground.y - 125))
     jumpplatform.shapeColor = ("orange")
     invisibleplatform = createSprite(jumpplatform.x, jumpplatform.y, 30, 4);
     invisibleplatform.visible = false;
     jumpplatform.velocityX = -4
-    jumpplatform.lifetime = 1250;
+    jumpplatform.lifetime = width + 250;
     invisibleplatform.velocityX = -4
-    invisibleplatform.lifetime = 1250;
+    invisibleplatform.lifetime = width + 250;
     
     jumpplatformGroup.add(jumpplatform);
     invisibleGroup.add(invisibleplatform);
@@ -301,13 +301,13 @@ function showPlatforms() {
 
 function showtop() {
   if (frameCount % 50 === 0) {
-    topPlatform = createSprite(600, 0, 400, 15);
+    topPlatform = createSprite(width, 0, 400, 15);
     topPlatform.velocityX = -4
-    topPlatform.lifetime = 1250;
+    topPlatform.lifetime = width + 250;
     
-    invisibleTop = createSprite(600, 0, 400, 10);
+    invisibleTop = createSprite(width, 0, 400, 10);
     invisibleTop.velocityX = -4
-    invisibleTop.lifetime = 1250;
+    invisibleTop.lifetime = width + 250;
     
     topGroup.add(topPlatform);
     invisibleGroup.add(invisibleTop);
@@ -316,20 +316,20 @@ function showtop() {
 
 function showLava() {
   if (frameCount % 60 === 0) {
-    lava = createSprite(600, 0, 10, 5);
+    lava = createSprite(width, 0, 10, 5);
     lava.y =  Math.round(random(10, ground.y - 90))
     lava.shapeColor = ("red")
     lava.velocityX = -8;
-    lava.lifetime = 1250;
+    lava.lifetime = width + 250;
     
     lavaGroup.add(lava);
   }
   
   if (frameCount % 500 === 0) {
-    top_blocker = createSprite(600, 20, 20, 50);
+    top_blocker = createSprite(width, 20, 20, 50);
     top_blocker.shapeColor = ("red")
     top_blocker.velocityX = -4;
-    top_blocker.lifetime = 1250;
+    top_blocker.lifetime = width + 250;
     
     lavaGroup.add(top_blocker);
   }
@@ -337,11 +337,11 @@ function showLava() {
 
 function showCoins() {
   if (frameCount % 75 === 0) {
-    coin = createSprite(600, 0, 5, 5);
+    coin = createSprite(width, 0, 5, 5);
     coin.y = Math.round(random(10, ground.y - 20));
     coin.shapeColor = ("yellow");
     coin.velocityX = -4
-    coin.lifetime = 1250;
+    coin.lifetime = width + 250;
     
     coinGroup.add(coin);
     
