@@ -68,13 +68,13 @@ function setup() {
   
   //create a ground sprite
   ground = createSprite(width/2,height,width,20);
-  ground.y = ground.y + 50
+  ground.y = ground.y -20
   ground.addImage("ground",groundImage);
   ground.x = ground.width /2;
   
   //creating invisible ground
   invisibleGround = createSprite(width/2,height + 15,width,20);
-  invisibleGround.y = invisibleGround.y + 50
+  invisibleGround.y = invisibleGround.y -20
   invisibleGround.visible = false;
   
   cloudGroup = new Group();
@@ -217,7 +217,7 @@ function showClouds(){
     cloud1 = createSprite(600, 50, 10, 10);
     cloud1.addImage(cloudImage);
     cloud1.scale = (random(0.25, 1.25))
-    cloud1.y = Math.round(random(10, width - 80))
+    cloud1.y = Math.round(random(10, height - 80))
     cloud1.velocityX = -3;
     trex.depth = cloud1.depth + 1;
     
@@ -230,7 +230,7 @@ function showClouds(){
     cloud2 = createSprite(600, 50, 10, 10);
     cloud2.addImage(cloudImage);
     cloud2.scale = (random(0.25, 1.25))
-    cloud2.y = Math.round(random(10, width - 130))
+    cloud2.y = Math.round(random(10, height - 130))
     cloud2.velocityX = -3;
     trex.depth = cloud2.depth + 1;
     
