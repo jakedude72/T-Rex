@@ -374,6 +374,7 @@ function reset() {
   restart.visible = false;
   
   trex.changeAnimation("running" ,trex_running);
+  trex.y = 0;
   
   GameState = PLAY
 }
