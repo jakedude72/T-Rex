@@ -68,11 +68,13 @@ function setup() {
   
   //create a ground sprite
   ground = createSprite(width/2,height,width,20);
+  ground.y = ground.y - 60
   ground.addImage("ground",groundImage);
   ground.x = ground.width /2;
   
   //creating invisible ground
   invisibleGround = createSprite(width/2,height + 15,width,20);
+  invisibleGround.y = invisibleGround.y - 60
   invisibleGround.visible = false;
   
   cloudGroup = new Group();
