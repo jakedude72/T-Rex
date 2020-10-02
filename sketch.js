@@ -56,7 +56,7 @@ function preload(){
 
 function setup() {
   background(220)
-  createCanvas(windowWidth, windowHeight)
+  createCanvas(windowWidth, windowHeight - 30)
   
   highscore = 0;
   
