@@ -191,7 +191,11 @@ function draw() {
     
     trex.x = 50
     
-    if (touches.length > 0 || mousePressedOver(restart)) {
+    if (touches.length > 0) {
+        reset();
+    }
+    
+    if (mousePressedOver(restart)) {
         reset();
     }
     
