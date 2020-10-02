@@ -67,12 +67,12 @@ function setup() {
   trex.scale = 0.5;
   
   //create a ground sprite
-  ground = createSprite(width/2,height - 20,width,20);
+  ground = createSprite(width/2,height + 150,width,20);
   ground.addImage("ground",groundImage);
   ground.x = ground.width /2;
   
   //creating invisible ground
-  invisibleGround = createSprite(width/2,height - 20,width,10);
+  invisibleGround = createSprite(width/2,height + 150,width,10);
   invisibleGround.visible = false;
   
   cloudGroup = new Group();
