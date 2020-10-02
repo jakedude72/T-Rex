@@ -191,7 +191,7 @@ function draw() {
     
     trex.x = 50
     
-    if (mousePressedOver(restart)) {
+    if (touches.length > 0 || mousePressedOver(restart)) {
         reset();
     }
     
@@ -377,4 +377,6 @@ function reset() {
   trex.y = 0;
   
   GameState = PLAY
+  
+  touches = [];
 }
