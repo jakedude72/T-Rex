@@ -199,9 +199,9 @@ function draw() {
   
   trex.collide(invisibleGround);
   
-  text("Score: " + score, 100, 50)
+  text("Score: " + score, 50, 50)
   
-  text("Highscore: " + highscore, 400, 50)
+  text("Highscore: " + highscore, 50, 100)
   
   if (keyDown("r")) {
         reset();
