@@ -217,7 +217,7 @@ function showClouds(){
     cloud1 = createSprite(600, 50, 10, 10);
     cloud1.addImage(cloudImage);
     cloud1.scale = (random(0.25, 1.25))
-    cloud1.y = Math.round(random(10, height - 80))
+    cloud1.y = Math.round(random(10, ground.y - 80))
     cloud1.velocityX = -3;
     trex.depth = cloud1.depth + 1;
     
@@ -230,7 +230,7 @@ function showClouds(){
     cloud2 = createSprite(600, 50, 10, 10);
     cloud2.addImage(cloudImage);
     cloud2.scale = (random(0.25, 1.25))
-    cloud2.y = Math.round(random(10, height - 130))
+    cloud2.y = Math.round(random(10, ground.y - 130))
     cloud2.velocityX = -3;
     trex.depth = cloud2.depth + 1;
     
@@ -273,7 +273,7 @@ function showObstacles() {
 function showPlatforms() {
   if (frameCount % 50 === 0) {
     floating_platforms = createSprite(600, 0, 60, 10);
-    floating_platforms.y = Math.round(random(50, width - 125))
+    floating_platforms.y = Math.round(random(50, ground.y - 125))
     invisibleplatform = createSprite(floating_platforms.x, floating_platforms.y, 60, 4);
     invisibleplatform.visible = false;
     floating_platforms.velocityX = -4
@@ -287,7 +287,7 @@ function showPlatforms() {
   
   if (frameCount % 285 === 0) {
     jumpplatform = createSprite(600, 0, 30, 10);
-    jumpplatform.y = Math.round(random(50, width - 125))
+    jumpplatform.y = Math.round(random(50, ground.y - 125))
     jumpplatform.shapeColor = ("orange")
     invisibleplatform = createSprite(jumpplatform.x, jumpplatform.y, 30, 4);
     invisibleplatform.visible = false;
@@ -319,7 +319,7 @@ function showtop() {
 function showLava() {
   if (frameCount % 60 === 0) {
     lava = createSprite(600, 0, 10, 5);
-    lava.y =  Math.round(random(10, width - 90))
+    lava.y =  Math.round(random(10, ground.y - 90))
     lava.shapeColor = ("red")
     lava.velocityX = -8;
     lava.lifetime = 1250;
@@ -340,7 +340,7 @@ function showLava() {
 function showCoins() {
   if (frameCount % 75 === 0) {
     coin = createSprite(600, 0, 5, 5);
-    coin.y = Math.round(random(10, width - 40));
+    coin.y = Math.round(random(10, ground.y - 20));
     coin.shapeColor = ("yellow");
     coin.velocityX = -4
     coin.lifetime = 1250;
