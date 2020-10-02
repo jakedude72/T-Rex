@@ -74,7 +74,7 @@ function setup() {
   
   //creating invisible ground
   invisibleGround = createSprite(width/2,height + 15,width,20);
-  invisibleground.y = invisibleground.y + 50
+  invisibleGround.y = invisibleGround.y + 50
   invisibleGround.visible = false;
   
   cloudGroup = new Group();
