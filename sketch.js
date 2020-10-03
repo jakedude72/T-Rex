@@ -2,7 +2,7 @@ var PLAY = 1;
 var END = 0;
 var GameState = PLAY;
 
-var lives = 3;
+var lives = 5;
 
 var trex, trex_running, trex_collided;
 var ground, invisibleGround, groundImage;
@@ -27,6 +27,7 @@ var top_blocker;
 var coin, coinGroup;
 
 var highscore, score;
+var lives, immune;
 
 var jumpSound, checkpointSound, dieSound;
 
@@ -160,13 +161,15 @@ function draw() {
     }
     
     if (trex.isTouching(obstacleGroup)){
-      GameState = END;
-      dieSound.play();
+      lose_a_life();
+      immunity();
     }
-      
-    if (trex.isTouching(lavaGroup)){
-      GameState = END;
-      dieSound.play();
+    else if (trex.isTouching(lavaGroup)){
+      lose_a_life();
+      immunity();
+    }
+    else if(trex.isTouching(obstacleGroup) === false && trex.isTouching(lavaGroup) === false) {
+      immune = 0;
     }
     
     
@@ -206,6 +209,8 @@ function draw() {
   text("Score: " + score, 50, 50)
   
   text("Highscore: " + highscore, 50, 100)
+  
+  text("Lives: " + lives, 50, 150)
   
   if (keyDown("r")) {
         reset();
@@ -364,6 +369,7 @@ function reset() {
   }
   
   score = 0
+  lives = 5;
   
   cloudGroup.destroyEach();
   obstacleGroup.destroyEach();
@@ -383,4 +389,18 @@ function reset() {
   GameState = PLAY
   
   touches = [];
+}
+
+function lose_a_life() {
+  if (immune === 0) {
+    lives = lives - 1
+    
+    if (lives === 0) {
+      GameState = END; 
+    }
+  }
+}
+
+function immunity() {
+  immune = 1;
 }
