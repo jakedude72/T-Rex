@@ -117,7 +117,7 @@ function draw() {
     trex.veloctiyY = 0;
     
     if(trex.isTouching(jumpplatformGroup)) {
-        trex.velocityY = -12 - (height / 90);
+        trex.velocityY = -12 - (height / 44);
       }
     
     trex.velocityY = trex.velocityY + 0.8
