@@ -421,7 +421,7 @@ function immunity() {
 }
 
 function showLives() {
-  if (frameCount % 2500 === 0) {
+  if (frameCount % 3000 === 0) {
     life = createSprite(width, 0);
     life.y = Math.round(random(30, ground.y - 30));
     life.addImage(lifeImage);
