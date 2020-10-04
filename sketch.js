@@ -3,6 +3,7 @@ var END = 0;
 var GameState = PLAY;
 
 var lives = 5;
+var life, lifeImage, lifeGroup;
 
 var trex, trex_running, trex_collided;
 var ground, invisibleGround, groundImage;
@@ -27,7 +28,7 @@ var top_blocker;
 var coin, coinGroup;
 
 var highscore, score;
-var lives, immune;
+var immune;
 
 var jumpSound, checkpointSound, dieSound;
 
@@ -53,6 +54,8 @@ function preload(){
   jumpSound = loadSound("jump.mp3");
   checkpointSound = loadSound("checkPoint.mp3");
   dieSound = loadSound("die.mp3");
+  
+  lifeImage = loadImage("life.png");
 }
 
 function setup() {
@@ -84,6 +87,7 @@ function setup() {
   lavaGroup = new Group();
   jumpplatformGroup = new Group();
   coinGroup = new Group();
+  lifeGroup = new Group();
   
   score = 0;
   
@@ -143,6 +147,7 @@ function draw() {
     showtop();
     showLava();
     showCoins();
+    showLives();
     
     number = Math.round(random(1, 200))
     
@@ -168,7 +173,11 @@ function draw() {
       lose_a_life();
       immunity();
     }
-    else if(trex.isTouching(obstacleGroup) === false && trex.isTouching(lavaGroup) === false) {
+    else if (trex.isTouching(lifeGroup)){
+      add_a_life();
+      immunity();
+    }
+    else if(trex.isTouching(obstacleGroup) === false && trex.isTouching(lavaGroup) === false && trex.isTouching(lifeGroup) === false) {
       immune = 0;
     }
     
@@ -401,6 +410,26 @@ function lose_a_life() {
   }
 }
 
+function add_a_life() {
+  if (immune === 0) {
+    lives = lives + 1
+  }
+}
+
 function immunity() {
   immune = 1;
+}
+
+function showLives() {
+  if (frameCount % 4500 === 0) {
+    life = createSprite(width, 0);
+    life.y = Math.round(random(30, ground.y - 30));
+    life.addImage(lifeImage);
+    life.scale = 0.1
+    life.velocityX = -4
+    life.lifetime = width + 250;
+    
+    lifeGroup.add(life);
+    
+  }
 }
