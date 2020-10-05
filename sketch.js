@@ -189,7 +189,7 @@ function draw() {
     
     
     if (trex.isTouching(shieldGroup)){
-      shieldCountdown = 1000
+      shieldCountdown = 400
       addshield()
     }
     
