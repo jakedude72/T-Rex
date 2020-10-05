@@ -228,6 +228,9 @@ function draw() {
     lavaGroup.setVelocityXEach(0);
     jumpplatformGroup.setVelocityXEach(0);
     coinGroup.setVelocityXEach(0);
+    lifeGroup.setVelocityXEach(0);
+    shieldGroup.setVelocityXEach(0);
+    moneyGroup.setVelocityXEach(0);
     trex.velocityY = 4;
     trex.changeAnimation("collided" ,trex_collided);
     
