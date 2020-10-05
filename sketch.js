@@ -163,6 +163,10 @@ function draw() {
     addshield();
     addmoney();
     
+    if (trex.y < 0) {
+      trex.y = 10
+    }
+    
     number = Math.round(random(1, 200))
     
     if (number / 4 === Math.round(random(1, 25))){
