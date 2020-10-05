@@ -4,6 +4,8 @@ var GameState = PLAY;
 
 var lives = 5;
 var life, lifeImage, lifeGroup;
+var shield, shieldImage, shieldGroup;
+var shieldCountdown = 0;
 
 var trex, trex_running, trex_collided;
 var ground, invisibleGround, groundImage;
@@ -56,6 +58,7 @@ function preload(){
   dieSound = loadSound("die.mp3");
   
   lifeImage = loadImage("life.png");
+  shieldImage = loadImage("circle.png");
 }
 
 function setup() {
@@ -88,6 +91,7 @@ function setup() {
   jumpplatformGroup = new Group();
   coinGroup = new Group();
   lifeGroup = new Group();
+  shieldGroup = new Group();
   
   score = 0;
   
@@ -148,6 +152,8 @@ function draw() {
     showLava();
     showCoins();
     showLives();
+    showShields();
+    addshield();
     
     number = Math.round(random(1, 200))
     
@@ -179,6 +185,18 @@ function draw() {
     }
     else if(trex.isTouching(obstacleGroup) === false && trex.isTouching(lavaGroup) === false && trex.isTouching(lifeGroup) === false) {
       immune = 0;
+    }
+    
+    
+    if (trex.isTouching(shieldGroup)){
+      shieldCountdown = 1000
+      addshield()
+    }
+    
+    
+    if (shieldCountdown === 0) {
+      trex.debug = false;
+      trex.setCollider("circle", 0, 0, 42)
     }
     
     
@@ -421,7 +439,7 @@ function immunity() {
 }
 
 function showLives() {
-  if (frameCount % 3000 === 0) {
+  if (frameCount % 2500 === 0) {
     life = createSprite(width, 0);
     life.y = Math.round(random(30, ground.y - 30));
     life.addImage(lifeImage);
@@ -431,5 +449,32 @@ function showLives() {
     
     lifeGroup.add(life);
     
+  }
+}
+
+function showShields() {
+  if (frameCount % 2835 === 0) {
+    shield = createSprite(width, 0);
+    shield.setCollider("rectangle", 0, 0, 30, 30)
+    shield.y = Math.round(random(30, ground.y - 30));
+    shield.addImage(shieldImage);
+    shield.scale = 0.1
+    shield.velocityX = -4
+    shield.lifetime = width + 250;
+    
+    shieldGroup.add(shield);
+    
+  }
+}
+
+function addshield() {
+  if (shieldCountdown > 0) {
+    immunity();
+    score = score + 1;
+    trex.setCollider("circle", 0, 0, 65)
+    trex.debug = true;
+    shieldCountdown = Math.round(shieldCountdown - 1)
+    
+    text("Countdown: " + shieldCountdown, 50, 200)
   }
 }
