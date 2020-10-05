@@ -439,7 +439,7 @@ function immunity() {
 }
 
 function showLives() {
-  if (frameCount % 2500 === 0) {
+  if (frameCount % 1395 === 0) {
     life = createSprite(width, 0);
     life.y = Math.round(random(30, ground.y - 30));
     life.addImage(lifeImage);
@@ -453,7 +453,7 @@ function showLives() {
 }
 
 function showShields() {
-  if (frameCount % 2835 === 0) {
+  if (frameCount % 1635 === 0) {
     shield = createSprite(width, 0);
     shield.setCollider("rectangle", 0, 0, 30, 30)
     shield.y = Math.round(random(30, ground.y - 30));
