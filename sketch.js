@@ -7,6 +7,9 @@ var life, lifeImage, lifeGroup;
 var shield, shieldImage, shieldGroup;
 var shieldCountdown = 0;
 
+var money, moneyImage, moneyGroup
+var moneyCountdown = 0;
+
 var trex, trex_running, trex_collided;
 var ground, invisibleGround, groundImage;
 var cloud1, cloud2;
@@ -59,6 +62,7 @@ function preload(){
   
   lifeImage = loadImage("life.png");
   shieldImage = loadImage("circle.png");
+  moneyImage = loadImage("money.jpg");
 }
 
 function setup() {
@@ -92,6 +96,7 @@ function setup() {
   coinGroup = new Group();
   lifeGroup = new Group();
   shieldGroup = new Group();
+  moneyGroup = new Group();
   
   score = 0;
   
@@ -153,7 +158,10 @@ function draw() {
     showCoins();
     showLives();
     showShields();
+    showMoney();
+    
     addshield();
+    addmoney();
     
     number = Math.round(random(1, 200))
     
@@ -189,10 +197,13 @@ function draw() {
     
     
     if (trex.isTouching(shieldGroup)){
-      shieldCountdown = 400
+      shieldCountdown = Math.round(random(400, 600))
       addshield()
     }
-    
+    if (trex.isTouching(moneyGroup)){
+      moneyCountdown = Math.round(random(250, 300))
+      addmoney()
+    }
     
     if (shieldCountdown === 0) {
       trex.debug = false;
@@ -476,5 +487,29 @@ function addshield() {
     shieldCountdown = Math.round(shieldCountdown - 1)
     
     text("Countdown: " + shieldCountdown, 50, 200)
+  }
+}
+
+function showMoney() {
+  if (frameCount % 1845 === 0) {
+    money = createSprite(width, 0);
+    money.setCollider("rectangle", 0, 0, 30, 30)
+    money.y = Math.round(random(30, ground.y - 30));
+    money.addImage(moneyImage);
+    money.scale = 0.1
+    money.velocityX = -4
+    money.lifetime = width + 250;
+    
+    moneyGroup.add(money);
+    
+  }
+}
+
+function addmoney() {
+  if (moneyCountdown > 0) {
+    score = score + 10;
+    moneyCountdown = Math.round(moneyCountdown - 1)
+    
+    text("Countdown: " + moneyCountdown, 50, 200)
   }
 }
