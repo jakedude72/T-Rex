@@ -251,11 +251,11 @@ function draw() {
   
   trex.collide(invisibleGround);
   
-  text("Score: " + score, 50, 50)
+  text("Score: " + score, 50, 40)
   
-  text("Highscore: " + highscore, 50, 100)
+  text("Highscore: " + highscore, 50, 80)
   
-  text("Lives: " + lives, 50, 150)
+  text("Lives: " + lives, 50, 120)
   
   if (keyDown("r")) {
         reset();
@@ -493,7 +493,7 @@ function addshield() {
     trex.debug = true;
     shieldCountdown = Math.round(shieldCountdown - 1)
     
-    text("Countdown: " + shieldCountdown, 50, 200)
+    text("Countdown: " + shieldCountdown, 50, 160)
   }
 }
 
