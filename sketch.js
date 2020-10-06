@@ -217,9 +217,6 @@ function draw() {
     
   }
   else if (GameState === END) {
-    obstacleGroup.setLifetimeEach(-1);
-    cloudGroup.setLifetimeEach(-1);
-    
     ground.velocityX = 0;
     cloudGroup.setVelocityXEach(0);
     obstacleGroup.setVelocityXEach(0);
@@ -231,6 +228,18 @@ function draw() {
     lifeGroup.setVelocityXEach(0);
     shieldGroup.setVelocityXEach(0);
     moneyGroup.setVelocityXEach(0);
+    
+    cloudGroup.setLifetimeEach(-1);
+    obstacleGroup.setLifetimeEach(-1);
+    floatingplatformGroup.setLifetimeEach(-1);
+    topGroup.setLifetimeEach(-1);
+    lavaGroup.setLifetimeEach(-1);
+    jumpplatformGroup.setLifetimeEach(-1);
+    coinGroup.setLifetimeEach(-1);
+    lifeGroup.setLifetimeEach(-1);
+    shieldGroup.setLifetimeEach(-1);
+    moneyGroup.setLifetimeEach(-1);
+    
     trex.velocityY = 4;
     trex.changeAnimation("collided" ,trex_collided);
     
@@ -424,6 +433,9 @@ function reset() {
   topGroup.destroyEach();
   lavaGroup.destroyEach();
   coinGroup.destroyEach();
+  lifeGroup.destroyEach();
+  shieldGroup.destroyEach();
+  moneyGroup.destroyEach();
   
   gameOver.visible = false;
   restart.visible = false;
