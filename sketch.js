@@ -148,7 +148,7 @@ function draw() {
     
     trex.x = 50
     
-    score = score + Math.round(getFrameRate() / 60);
+    score = score + 0.2;
     
     showClouds();
     showObstacles();
@@ -260,7 +260,7 @@ function draw() {
   
   trex.collide(invisibleGround);
   
-  text("Score: " + score, 50, 40)
+  text("Score: " + Math.round(score), 50, 40)
   
   text("Highscore: " + highscore, 50, 80)
   
@@ -418,8 +418,8 @@ function jump() {
 }
 
 function reset() {
-  if (highscore < score) {
-    highscore = score;
+  if (highscore < Math.round(score)) {
+    highscore = Math.round(score);
   }
   
   score = 0
