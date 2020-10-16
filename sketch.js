@@ -125,12 +125,12 @@ function draw() {
       jump(); 
     }    
   
-  if (highscore < Math.round(score)) {
-    highscore = Math.round(score);
-  }
-  
   if (GameState === PLAY){
   
+    if (highscore < Math.round(score)) {
+      highscore = Math.round(score);
+    }
+    
     trex.velocityX = 0; 
     trex.veloctiyY = 0;
     
