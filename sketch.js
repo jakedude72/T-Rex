@@ -32,7 +32,8 @@ var top_blocker;
 
 var coin, coinGroup;
 
-var highscore, score;
+var highscore = 0;
+var score = 0;
 var immune;
 
 var jumpSound, checkpointSound, dieSound;
