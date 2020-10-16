@@ -127,11 +127,6 @@ function draw() {
     }    
   
   if (GameState === PLAY){
-  
-    if (Math.round(score) > highscore) {
-      highscore = Math.round(score);
-    }
-    
     trex.velocityX = 0; 
     trex.veloctiyY = 0;
     
@@ -274,6 +269,11 @@ function draw() {
   if (keyDown("r")) {
         reset();
     }
+  
+  if (Math.round(score) > highscore) {
+      highscore = Math.round(score);
+  }
+  
   drawSprites();
 }
 
