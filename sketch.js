@@ -32,8 +32,8 @@ var top_blocker;
 
 var coin, coinGroup;
 
-var highscore = 0;
-var score = 0;
+var highscore;
+var score;
 var immune;
 
 var jumpSound, checkpointSound, dieSound;
@@ -128,7 +128,7 @@ function draw() {
   
   if (GameState === PLAY){
   
-    if (highscore < Math.round(score)) {
+    if (Math.round(score) > highscore) {
       highscore = Math.round(score);
     }
     
