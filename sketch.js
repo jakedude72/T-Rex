@@ -727,6 +727,7 @@ function addslow() {
     shieldGroup.setVelocityXEach(-2);
     moneyGroup.setVelocityXEach(-2);
     slowGroup.setVelocityXEach(-2);
+    invisibleGroup.setVelocityXEach(-2);
     
     slowCountdown = Math.round(slowCountdown - 1)
     
