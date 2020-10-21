@@ -4,11 +4,15 @@ var GameState = PLAY;
 
 var lives = 5;
 var life, lifeImage, lifeGroup;
+
 var shield, shieldImage, shieldGroup;
 var shieldCountdown = 0;
 
 var money, moneyImage, moneyGroup
 var moneyCountdown = 0;
+
+var slow, slowImage, slowGroup
+var slowCountdown = 0;
 
 var trex, trex_running, trex_collided;
 var ground, invisibleGround, groundImage;
@@ -64,6 +68,7 @@ function preload(){
   lifeImage = loadImage("life.png");
   shieldImage = loadImage("circle.png");
   moneyImage = loadImage("money.jpg");
+  slowImage = loadImage("left_arrow.png")
 }
 
 function setup() {
@@ -98,6 +103,7 @@ function setup() {
   lifeGroup = new Group();
   shieldGroup = new Group();
   moneyGroup = new Group();
+  slowGroup = new Group();
   
   score = 0;
   
@@ -159,9 +165,11 @@ function draw() {
     showLives();
     showShields();
     showMoney();
+    showSlow();
     
     addshield();
     addmoney();
+    addslow();
     
     if (trex.y < 0) {
       trex.y = 10
@@ -214,6 +222,25 @@ function draw() {
       trex.setCollider("circle", 0, 0, 42)
     }
     
+    if (slowCountdown === 0) {
+    cloudGroup.setVelocityXEach(-3);
+    obstacleGroup.setVelocityXEach(-4);
+    floatingplatformGroup.setVelocityXEach(-4);
+    topGroup.setVelocityXEach(-4);
+    lavaGroup.setVelocityXEach(-8);
+    jumpplatformGroup.setVelocityXEach(-4);
+    coinGroup.setVelocityXEach(-4);
+    lifeGroup.setVelocityXEach(-4);
+    shieldGroup.setVelocityXEach(-4);
+    moneyGroup.setVelocityXEach(-4);
+    slowGroup.setVelocityXEach(-4);
+    }
+    
+    if (trex.isTouching(slowGroup)){
+      slowCountdown = Math.round(random(400, 475))
+      addslow()
+    }
+    
     
   }
   else if (GameState === END) {
@@ -228,6 +255,7 @@ function draw() {
     lifeGroup.setVelocityXEach(0);
     shieldGroup.setVelocityXEach(0);
     moneyGroup.setVelocityXEach(0);
+    slowGroup.setVelocityXEach(0);
     
     cloudGroup.setLifetimeEach(-1);
     obstacleGroup.setLifetimeEach(-1);
@@ -239,6 +267,7 @@ function draw() {
     lifeGroup.setLifetimeEach(-1);
     shieldGroup.setLifetimeEach(-1);
     moneyGroup.setLifetimeEach(-1);
+    slowGroup.setLifetimeEach(-1);
     
     trex.velocityY = 4;
     trex.changeAnimation("collided" ,trex_collided);
@@ -337,33 +366,65 @@ function showObstacles() {
 }
 
 function showPlatforms() {
-  if (frameCount % 50 === 0) {
-    floating_platforms = createSprite(width, 0, 60, 10);
-    floating_platforms.y = Math.round(random(50, ground.y - 125))
-    invisibleplatform = createSprite(floating_platforms.x, floating_platforms.y, 60, 4);
-    invisibleplatform.visible = false;
-    floating_platforms.velocityX = -4
-    floating_platforms.lifetime = width + 250;
-    invisibleplatform.velocityX = -4
-    invisibleplatform.lifetime = width + 250;
+  if (slowCountdown > 0) {
+    if (frameCount % 100 === 0) {
+      floating_platforms = createSprite(width, 0, 60, 10);
+      floating_platforms.y = Math.round(random(50, ground.y - 125))
+      invisibleplatform = createSprite(floating_platforms.x, floating_platforms.y, 60, 4);
+      invisibleplatform.visible = false;
+      floating_platforms.velocityX = -4
+      floating_platforms.lifetime = width + 250;
+      invisibleplatform.velocityX = -4
+      invisibleplatform.lifetime = width + 250;
     
-    floatingplatformGroup.add(floating_platforms);
-    invisibleGroup.add(invisibleplatform);
-  }
+      floatingplatformGroup.add(floating_platforms);
+      invisibleGroup.add(invisibleplatform);
+    }
   
-  if (frameCount % 285 === 0) {
-    jumpplatform = createSprite(width, 0, 30, 10);
-    jumpplatform.y = Math.round(random(50, ground.y - 125))
-    jumpplatform.shapeColor = ("orange")
-    invisibleplatform = createSprite(jumpplatform.x, jumpplatform.y, 30, 4);
-    invisibleplatform.visible = false;
-    jumpplatform.velocityX = -4
-    jumpplatform.lifetime = width + 250;
-    invisibleplatform.velocityX = -4
-    invisibleplatform.lifetime = width + 250;
+    if (frameCount % 570 === 0) {
+      jumpplatform = createSprite(width, 0, 30, 10);
+      jumpplatform.y = Math.round(random(50, ground.y - 125))
+      jumpplatform.shapeColor = ("orange")
+      invisibleplatform = createSprite(jumpplatform.x, jumpplatform.y, 30, 4);
+      invisibleplatform.visible = false;
+      jumpplatform.velocityX = -4
+      jumpplatform.lifetime = width + 250;
+      invisibleplatform.velocityX = -4
+      invisibleplatform.lifetime = width + 250;
     
-    jumpplatformGroup.add(jumpplatform);
-    invisibleGroup.add(invisibleplatform);
+      jumpplatformGroup.add(jumpplatform);
+      invisibleGroup.add(invisibleplatform);
+    }
+  }
+  else {
+    if (frameCount % 50 === 0) {
+      floating_platforms = createSprite(width, 0, 60, 10);
+      floating_platforms.y = Math.round(random(50, ground.y - 125))
+      invisibleplatform = createSprite(floating_platforms.x, floating_platforms.y, 60, 4);
+      invisibleplatform.visible = false;
+      floating_platforms.velocityX = -4
+      floating_platforms.lifetime = width + 250;
+      invisibleplatform.velocityX = -4
+      invisibleplatform.lifetime = width + 250;
+    
+      floatingplatformGroup.add(floating_platforms);
+      invisibleGroup.add(invisibleplatform);
+    }
+  
+    if (frameCount % 285 === 0) {
+      jumpplatform = createSprite(width, 0, 30, 10);
+      jumpplatform.y = Math.round(random(50, ground.y - 125))
+      jumpplatform.shapeColor = ("orange")
+      invisibleplatform = createSprite(jumpplatform.x, jumpplatform.y, 30, 4);
+      invisibleplatform.visible = false;
+      jumpplatform.velocityX = -4
+      jumpplatform.lifetime = width + 250;
+      invisibleplatform.velocityX = -4
+      invisibleplatform.lifetime = width + 250;
+    
+      jumpplatformGroup.add(jumpplatform);
+      invisibleGroup.add(invisibleplatform);
+    }
   }
 }
 
@@ -383,7 +444,28 @@ function showtop() {
 }
 
 function showLava() {
-  if (frameCount % 60 === 0) {
+  if (slowCountdown > 0) {
+    if (frameCount % 120 === 0) {
+    lava = createSprite(width, 0, 10, 5);
+    lava.y =  Math.round(random(10, ground.y - 90))
+    lava.shapeColor = ("red")
+    lava.velocityX = -8;
+    lava.lifetime = width + 250;
+    
+    lavaGroup.add(lava);
+  }
+  
+  if (frameCount % 1000 === 0) {
+    top_blocker = createSprite(width, 20, 20, 50);
+    top_blocker.shapeColor = ("red")
+    top_blocker.velocityX = -4;
+    top_blocker.lifetime = width + 250;
+    
+    topGroup.add(top_blocker);
+  }
+  }
+  else {
+    if (frameCount % 60 === 0) {
     lava = createSprite(width, 0, 10, 5);
     lava.y =  Math.round(random(10, ground.y - 90))
     lava.shapeColor = ("red")
@@ -399,12 +481,14 @@ function showLava() {
     top_blocker.velocityX = -4;
     top_blocker.lifetime = width + 250;
     
-    lavaGroup.add(top_blocker);
+    topGroup.add(top_blocker);
+  }
   }
 }
 
 function showCoins() {
-  if (frameCount % 75 === 0) {
+  if (slowCountdown > 0) {
+    if (frameCount % 150 === 0) {
     coin = createSprite(width, 0, 5, 5);
     coin.y = Math.round(random(10, ground.y - 20));
     coin.shapeColor = ("yellow");
@@ -413,6 +497,19 @@ function showCoins() {
     
     coinGroup.add(coin);
     
+  }
+  }
+  else {
+    if (frameCount % 75 === 0) {
+    coin = createSprite(width, 0, 5, 5);
+    coin.y = Math.round(random(10, ground.y - 20));
+    coin.shapeColor = ("yellow");
+    coin.velocityX = -4
+    coin.lifetime = width + 250;
+    
+    coinGroup.add(coin);
+    
+  }
   }
 }
 
@@ -474,7 +571,8 @@ function immunity() {
 }
 
 function showLives() {
-  if (frameCount % 1395 === 0) {
+  if (slowCountdown > 0) {
+    if (frameCount % 2790 === 0) {
     life = createSprite(width, 0);
     life.y = Math.round(random(30, ground.y - 30));
     life.addImage(lifeImage);
@@ -485,10 +583,24 @@ function showLives() {
     lifeGroup.add(life);
     
   }
+  }
+  else {
+    if (frameCount % 1395 === 0) {
+    life = createSprite(width, 0);
+    life.y = Math.round(random(30, ground.y - 30));
+    life.addImage(lifeImage);
+    life.scale = 0.1
+    life.velocityX = -4
+    life.lifetime = width + 250;
+    
+    lifeGroup.add(life);
+    
+  }
+  }
 }
-
 function showShields() {
-  if (frameCount % 1635 === 0) {
+  if (slowCountdown > 0) {
+    if (frameCount % 3270 === 0) {
     shield = createSprite(width, 0);
     shield.setCollider("rectangle", 0, 0, 30, 30)
     shield.y = Math.round(random(30, ground.y - 30));
@@ -499,6 +611,21 @@ function showShields() {
     
     shieldGroup.add(shield);
     
+  }
+  }
+  else {
+    if (frameCount % 1635 === 0) {
+    shield = createSprite(width, 0);
+    shield.setCollider("rectangle", 0, 0, 30, 30)
+    shield.y = Math.round(random(30, ground.y - 30));
+    shield.addImage(shieldImage);
+    shield.scale = 0.1
+    shield.velocityX = -4
+    shield.lifetime = width + 250;
+    
+    shieldGroup.add(shield);
+    
+  }
   }
 }
 
@@ -515,7 +642,8 @@ function addshield() {
 }
 
 function showMoney() {
-  if (frameCount % 1845 === 0) {
+  if (slowCountdown > 0) {
+    if (frameCount % 3690 === 0) {
     money = createSprite(width, 0);
     money.setCollider("rectangle", 0, 0, 30, 30)
     money.y = Math.round(random(30, ground.y - 30));
@@ -527,13 +655,81 @@ function showMoney() {
     moneyGroup.add(money);
     
   }
+      }
+  else {
+    if (frameCount % 1845 === 0) {
+    money = createSprite(width, 0);
+    money.setCollider("rectangle", 0, 0, 30, 30)
+    money.y = Math.round(random(30, ground.y - 30));
+    money.addImage(moneyImage);
+    money.scale = 0.1
+    money.velocityX = -4
+    money.lifetime = width + 250;
+    
+    moneyGroup.add(money);
+    
+  }
+      }
 }
 
 function addmoney() {
   if (moneyCountdown > 0) {
-    score = score + 10;
+    score = score + 15;
     moneyCountdown = Math.round(moneyCountdown - 1)
     
     text("Countdown: " + moneyCountdown, 50, 200)
+  }
+}
+
+function showSlow() {
+  if (slowCountdown > 0) {
+    if (frameCount % 4330 === 0) {
+    slow = createSprite(width, 0);
+    slow.setCollider("rectangle", 0, 0, 30, 30)
+    slow.y = Math.round(random(30, ground.y - 30));
+    slow.addImage(slowImage);
+    slow.scale = 0.1
+    slow.velocityX = -4
+    slow.lifetime = width + 250;
+    
+    slowGroup.add(slow);
+    
+  }
+      }
+  else {
+    if (frameCount % 2165 === 0) {
+    slow = createSprite(width, 0);
+    slow.setCollider("rectangle", 0, 0, 30, 30)
+    slow.y = Math.round(random(30, ground.y - 30));
+    slow.addImage(slowImage);
+    slow.scale = 0.1
+    slow.velocityX = -4
+    slow.lifetime = width + 250;
+    
+    slowGroup.add(slow);
+    
+  }
+      }
+}
+
+function addslow() {
+  if (slowCountdown > 0) {
+    score = score + 5;
+    
+    cloudGroup.setVelocityXEach(-1.5);
+    obstacleGroup.setVelocityXEach(-2);
+    floatingplatformGroup.setVelocityXEach(-2);
+    topGroup.setVelocityXEach(-2);
+    lavaGroup.setVelocityXEach(-4);
+    jumpplatformGroup.setVelocityXEach(-2);
+    coinGroup.setVelocityXEach(-2);
+    lifeGroup.setVelocityXEach(-2);
+    shieldGroup.setVelocityXEach(-2);
+    moneyGroup.setVelocityXEach(-2);
+    slowGroup.setVelocityXEach(-2);
+    
+    slowCountdown = Math.round(slowCountdown - 1)
+    
+    text("Countdown: " + slowCountdown, 50, 240)
   }
 }
