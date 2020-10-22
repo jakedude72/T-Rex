@@ -175,6 +175,13 @@ function draw() {
       trex.y = 10
     }
     
+    if (slowCountdown > 0) {
+      invisibleGroup.setVelocityXEach(-2);
+    }
+    else {
+      invisibleGroup.setVelocityXEach(-4);
+    }
+    
     number = Math.round(random(1, 200))
     
     if (number / 4 === Math.round(random(1, 25))){
